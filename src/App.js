@@ -10,14 +10,16 @@ import {
 import TextInput from "./TextInput";
 import React from "react";
 
-const useStyles = makeStyles({
-  app: {
-    padding: 40,
-  },
+const useStyles = makeStyles((theme) => ({
+  app: {},
   textPadding: {
     paddingBottom: 16,
   },
-});
+  header: {
+    backgroundColor: theme.palette.common.white,
+    zIndex: 100,
+  },
+}));
 
 const individualWorksheetFields = [
   { text: "Premiums", twoFields: true, key: "premiums" },
@@ -91,6 +93,25 @@ const individualWorksheetFields = [
 function App() {
   const classes = useStyles();
   const [formFields, setFormFields] = React.useState({});
+  const [monthlyCost, setMonthlyCost] = React.useState(0);
+  const [annualCost, setAnnualCost] = React.useState(0);
+  const [illnessCost, setIllnessCost] = React.useState(0);
+
+  const add = (arr) => {
+    return arr.reduce((acc, val) => {
+      return acc + Number(val);
+    }, 0);
+  };
+
+  React.useEffect(() => {
+    formFields?.individual?.monthly &&
+      setMonthlyCost(add(Object.values(formFields?.individual?.monthly)));
+  }, [formFields?.individual?.monthly]);
+
+  React.useEffect(() => {
+    formFields?.individual?.annual &&
+      setAnnualCost(add(Object.values(formFields?.individual?.annual)));
+  }, [formFields?.individual?.annual]);
 
   const handleFormFieldChange = (e) => {
     setFormFields({ ...formFields, [e.target.name]: e.target.value });
@@ -132,10 +153,28 @@ function App() {
   console.log(formFields);
   return (
     <div className={classes.app}>
-      <Typography variant="h4" gutterBottom align="center">
-        NY Health Savings Calculator for Individuals
-      </Typography>
-      <Box mt={8} mx={12}>
+      <Box
+        p={2}
+        borderBottom={1}
+        position="sticky"
+        top={0}
+        height={120}
+        className={classes.header}
+      >
+        <Typography variant="h4" gutterBottom align="center">
+          NY Health Savings Calculator for Individuals
+        </Typography>
+        <Typography variant="body1" align="left">
+          Cost of Current Coverage (Annually): ${annualCost}
+        </Typography>
+        <Typography variant="body1" align="left">
+          Cost of Current Coverage (Monthly): ${monthlyCost}
+        </Typography>
+        <Typography variant="body1" align="left">
+          Cost in case of serious illness or accident: ${illnessCost}
+        </Typography>
+      </Box>
+      <Box p={5}>
         <Grid container direction="column" spacing={2}>
           <Grid item>
             <Typography variant="body1">
@@ -185,6 +224,7 @@ function App() {
               <Grid
                 item
                 container
+                xs={8}
                 justifyContent="space-between"
                 alignItems="center"
               >
@@ -235,6 +275,7 @@ function App() {
                       {field.twoFields ? (
                         <Grid
                           item
+                          xs={8}
                           container
                           justifyContent="space-between"
                           alignItems="center"
