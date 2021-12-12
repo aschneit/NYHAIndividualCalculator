@@ -4,7 +4,7 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => ({}));
 
-function TextInput(props) {
+const TextInput = (props) => {
   const classes = useStyles();
   return (
     <TextField
@@ -20,6 +20,6 @@ function TextInput(props) {
       }}
     />
   );
-}
+};
 
 export default TextInput;
