@@ -11,6 +11,7 @@ import {
 import TextInput from "./TextInput";
 import React from "react";
 import NyhCostForm from "./NyhCostForm";
+import logo from "./CNYH_logo.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   app: {},
@@ -20,6 +21,13 @@ const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: theme.palette.common.white,
     zIndex: 100,
+  },
+  logo: {
+    width: 180,
+    height: "auto",
+  },
+  calculations: {
+    fontWeight: "bold",
   },
 }));
 
@@ -326,42 +334,27 @@ function App() {
         makeNyhCalculations();
         break;
       case step === 5:
-        if (
-          formFields?.nyHealth?.self &&
-          Object.values(formFields?.nyHealth?.self).some(
-            (v) => v !== "" || v !== "0"
-          )
-        ) {
-          setStep(6);
-        } else {
+        if (makeNyhCalculation("self") === 0) {
           makeNyhCalculations();
           setStep("end");
+        } else {
+          setStep(6);
         }
         break;
       case step === 6:
-        if (
-          formFields?.nyHealth?.spouse &&
-          Object.values(formFields?.nyHealth?.spouse || {}).some(
-            (v) => v !== "" || v !== "0"
-          )
-        ) {
-          setStep(step + 1);
-        } else {
+        if (makeNyhCalculation("spouse") === 0) {
           makeNyhCalculations();
           setStep("end");
+        } else {
+          setStep(7);
         }
         break;
       case step > 6:
-        if (
-          formFields?.nyHealth?.[step - 7] &&
-          Object.values(formFields?.nyHealth?.[step - 7] || {}).some(
-            (v) => v !== "" || v !== "0"
-          )
-        ) {
-          setStep(step + 1);
-        } else {
+        if (makeNyhCalculation(step - 7) === 0) {
           makeNyhCalculations();
           setStep("end");
+        } else {
+          setStep(step + 1);
         }
         break;
       default:
@@ -375,33 +368,60 @@ function App() {
   return (
     <div className={classes.app}>
       <Box
-        p={2}
+        p={3}
         borderBottom={1}
         position="sticky"
         top={0}
         className={classes.header}
       >
-        <Typography variant="h4" gutterBottom align="center">
+        <Typography variant="h5" gutterBottom align="center">
           NY Health Savings Calculator for Individuals
         </Typography>
-        <Typography variant="h6" align="left" color="secondary">
-          Cost of Current Coverage (Annually):
-          {showCalculations ? ` $${annualCost}` : ""}
-        </Typography>
-        <Typography variant="h6" align="left" color="secondary">
-          Cost of Current Coverage (Monthly):
-          {showCalculations ? ` $${monthlyCost}` : ""}
-        </Typography>
-        <Typography variant="h6" align="left" color="secondary">
-          Cost in case of serious illness or accident:
-          {showCalculations ? ` $${illnessCost}` : ""}
-        </Typography>
-        <Typography variant="h6" align="left" color="secondary">
-          Cost for NY Health:
-          {showNyhCalculations ? ` $${nyhCost}` : ""}
-        </Typography>
+        <Grid container justify="space-between" alignItems="center">
+          <Grid item>
+            <img src={logo} className={classes.logo} alt="CNYH logo" />
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="body1"
+              align="left"
+              color="secondary"
+              className={classes.calculations}
+            >
+              Cost of Current Coverage (Annually):
+              {showCalculations ? ` $${annualCost}` : ""}
+            </Typography>
+            <Typography
+              variant="body1"
+              align="left"
+              color="secondary"
+              className={classes.calculations}
+            >
+              Cost of Current Coverage (Monthly):
+              {showCalculations ? ` $${monthlyCost}` : ""}
+            </Typography>
+            <Typography
+              variant="body1"
+              align="left"
+              color="secondary"
+              className={classes.calculations}
+            >
+              Cost in case of serious illness or accident:
+              {showCalculations ? ` $${illnessCost}` : ""}
+            </Typography>
+            <Typography
+              variant="body1"
+              align="left"
+              color="secondary"
+              className={classes.calculations}
+            >
+              Cost for NY Health:
+              {showNyhCalculations ? ` $${nyhCost}` : ""}
+            </Typography>
+          </Grid>
+        </Grid>
       </Box>
-      <Box p={5}>
+      <Box p={6}>
         <Grid container direction="column" spacing={2}>
           {step === 1 && (
             <Grid item>
