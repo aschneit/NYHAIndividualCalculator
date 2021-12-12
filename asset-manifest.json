@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/NYHAIndividualCalculator/static/css/main.19281910.chunk.css",
+    "main.js": "/NYHAIndividualCalculator/static/js/main.40901e84.chunk.js",
+    "main.js.map": "/NYHAIndividualCalculator/static/js/main.40901e84.chunk.js.map",
+    "runtime-main.js": "/NYHAIndividualCalculator/static/js/runtime-main.1e3203c2.js",
+    "runtime-main.js.map": "/NYHAIndividualCalculator/static/js/runtime-main.1e3203c2.js.map",
+    "static/js/2.ac4313ad.chunk.js": "/NYHAIndividualCalculator/static/js/2.ac4313ad.chunk.js",
+    "static/js/2.ac4313ad.chunk.js.map": "/NYHAIndividualCalculator/static/js/2.ac4313ad.chunk.js.map",
+    "static/js/3.27da2c59.chunk.js": "/NYHAIndividualCalculator/static/js/3.27da2c59.chunk.js",
+    "static/js/3.27da2c59.chunk.js.map": "/NYHAIndividualCalculator/static/js/3.27da2c59.chunk.js.map",
+    "index.html": "/NYHAIndividualCalculator/index.html",
+    "static/css/main.19281910.chunk.css.map": "/NYHAIndividualCalculator/static/css/main.19281910.chunk.css.map",
+    "static/js/2.ac4313ad.chunk.js.LICENSE.txt": "/NYHAIndividualCalculator/static/js/2.ac4313ad.chunk.js.LICENSE.txt",
+    "static/media/CNYH_logo.5e9c055c.jpeg": "/NYHAIndividualCalculator/static/media/CNYH_logo.5e9c055c.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1e3203c2.js",
+    "static/js/2.ac4313ad.chunk.js",
+    "static/css/main.19281910.chunk.css",
+    "static/js/main.40901e84.chunk.js"
+  ]
+}
