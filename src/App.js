@@ -94,7 +94,7 @@ const individualWorksheetFields = [
     key: "otherNotCoveredCosts",
   },
   {
-    text: "Estimated cost of care or treatment that was recommended, but you could not afford it due to deductible of copay, and therefore did not receive it (This will be included in the total, since it would have been covered under NY Health.)",
+    text: "Estimated cost of care or treatment that was recommended, but you could not afford it due to deductible or copay, and therefore did not receive it (This will be included in the total, since it would have been covered under NY Health.)",
     twoFields: true,
     key: "avoidedTreatmentCosts",
   },
@@ -127,6 +127,7 @@ function App() {
   const [annualCost, setAnnualCost] = React.useState(0);
   const [illnessCost, setIllnessCost] = React.useState(0);
   const [nyhCost, setNyhCost] = React.useState(0);
+  const [nyhMonthlyCost, setNyhMonthlyCost] = React.useState(0);
 
   const add = (arr) => {
     return arr.reduce((acc, val) => {
@@ -236,6 +237,9 @@ function App() {
   const makeNyhCalculations = () => {
     if (formFields?.planType === "individual") {
       setNyhCost(addCommas(makeNyhCalculation("individual").toFixed(2)));
+      setNyhMonthlyCost(
+        addCommas((makeNyhCalculation("individual") / 12).toFixed(2))
+      );
     } else {
       const familyKeys = formFields?.nyHealth
         ? Object.keys(formFields.nyHealth).filter((el) => el !== "individual")
@@ -244,6 +248,7 @@ function App() {
         return acc + makeNyhCalculation(k);
       }, 0);
       setNyhCost(addCommas(total.toFixed(2)));
+      setNyhMonthlyCost(addCommas((total / 12).toFixed(2)));
     }
   };
 
@@ -415,8 +420,17 @@ function App() {
               color="secondary"
               className={classes.calculations}
             >
-              Cost for NY Health:
+              Cost for NY Health (Annually):
               {showNyhCalculations ? ` $${nyhCost}` : ""}
+            </Typography>
+            <Typography
+              variant="body1"
+              align="left"
+              color="secondary"
+              className={classes.calculations}
+            >
+              Cost for NY Health (Monthly):
+              {showNyhCalculations ? ` $${nyhMonthlyCost}` : ""}
             </Typography>
           </Grid>
         </Grid>
