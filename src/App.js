@@ -163,12 +163,18 @@ function App() {
         : 0;
       combinedTotal = monthlyTotal + annualTotal;
     } else if (formFields?.[`${key}InputChoice`] === "worksheet") {
-      monthlyTotal = formFields?.[key]?.monthly
-        ? add(Object.values(formFields?.[key]?.monthly)) * 12
-        : 0;
-      annualTotal = formFields?.[key]?.annual
-        ? add(Object.values(formFields?.[key]?.annual))
-        : 0;
+      let monthlyTotal = 0;
+      if (formFields?.[key]?.monthly) {
+        const { otherNotCoveredCosts, ...formFieldsForMonthlyTotal } =
+          formFields[key].monthly;
+        monthlyTotal = add(Object.values(formFieldsForMonthlyTotal)) * 12;
+      }
+      let annualTotal = 0;
+      if (formFields?.[key]?.annual) {
+        const { otherNotCoveredCosts, ...formFieldsForAnnualTotal } =
+          formFields[key].annual;
+        annualTotal = add(Object.values(formFieldsForAnnualTotal));
+      }
       combinedTotal =
         monthlyTotal +
         annualTotal +
