@@ -339,12 +339,7 @@ function App() {
         makeNyhCalculations();
         break;
       case step === 5:
-        if (makeNyhCalculation("self") === 0) {
-          makeNyhCalculations();
-          setStep("end");
-        } else {
-          setStep(6);
-        }
+        setStep(6);
         break;
       case step === 6:
         if (makeNyhCalculation("spouse") === 0) {
