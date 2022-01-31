@@ -129,6 +129,10 @@ function App() {
   const [nyhCost, setNyhCost] = React.useState(0);
   const [nyhMonthlyCost, setNyhMonthlyCost] = React.useState(0);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [step]);
+
   const add = (arr) => {
     return arr.reduce((acc, val) => {
       return acc + +val;
@@ -363,6 +367,9 @@ function App() {
           setStep(step + 1);
         }
         break;
+      case step === "end":
+        setStep("feedback");
+        break;
       default:
         setStep(step);
     }
@@ -493,7 +500,8 @@ function App() {
                   <Grid
                     item
                     container
-                    xs={8}
+                    md={8}
+                    xs={12}
                     justifyContent="space-between"
                     alignItems="center"
                   >
@@ -547,7 +555,8 @@ function App() {
                           {field.twoFields ? (
                             <Grid
                               item
-                              xs={8}
+                              xs={12}
+                              md={8}
                               container
                               justifyContent="space-between"
                               alignItems="center"
@@ -659,7 +668,8 @@ function App() {
                   <Grid
                     item
                     container
-                    xs={8}
+                    md={8}
+                    xs={12}
                     justifyContent="space-between"
                     alignItems="center"
                   >
@@ -713,7 +723,8 @@ function App() {
                           {field.twoFields ? (
                             <Grid
                               item
-                              xs={8}
+                              md={8}
+                              xs={12}
                               container
                               justifyContent="space-between"
                               alignItems="center"
@@ -948,11 +959,36 @@ function App() {
                   today.
                 </Typography>
               </Grid>
+              <Grid item>
+                <Typography variant="body1">
+                  Please use the Feedback button for questions or comments.
+                </Typography>
+              </Grid>
             </>
           )}
 
+          {step === "feedback" && (
+            <Grid item>
+              <Grid container justifyContent="center">
+                <Grid item xs={12}>
+                  <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdrnZ2X27lBqA7mfxqytmT3lqFkAX-BEHs0zD6Kdb38utRnyQ/viewform?embedded=true"
+                    width="100%"
+                    height="1000"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="feedback"
+                  >
+                    Loading…
+                  </iframe>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
+
           <Grid item container justifyContent="space-between">
-            {step !== 1 && (
+            {step !== 1 && step !== "feedback" && (
               <Button
                 color="secondary"
                 variant="contained"
@@ -961,13 +997,13 @@ function App() {
                 {step === "end" ? "Start Over" : "Go Back"}
               </Button>
             )}
-            {step !== "end" && (
+            {step !== "feedback" && (
               <Button
                 color="secondary"
                 variant="contained"
                 onClick={onContinueClick}
               >
-                Continue
+                {step === "end" ? "Feedback" : "Continue"}
               </Button>
             )}
           </Grid>
