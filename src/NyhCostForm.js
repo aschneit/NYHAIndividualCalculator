@@ -4,10 +4,6 @@ import React from "react";
 
 const nyHealthFields = [
   {
-    text: "Self-Employment Income (taxable, with all expenses deducted, if over $25,000)",
-    key: "selfEmploymentIncome",
-  },
-  {
     text: "Income from Job 1 (if any over $25,000)",
     key: "firstJobIncome",
   },
@@ -18,6 +14,10 @@ const nyHealthFields = [
   {
     text: "Income from Job 3 (if any over $25,000)",
     key: "thirdJobIncome",
+  },
+  {
+    text: "Self-Employment Income (taxable, with all expenses deducted, if over $25,000)",
+    key: "selfEmploymentIncome",
   },
   {
     text: "Income from interest and/or dividends (if any over $25,000)",
