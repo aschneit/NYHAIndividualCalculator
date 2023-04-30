@@ -102,15 +102,15 @@ const individualWorksheetFields = [
 
 const brackets = [
   { lowerBound: 0, upperBound: 24999, baseCost: 0, rate: 0 },
-  { lowerBound: 25000, upperBound: 49999, baseCost: 0, rate: 0.138 },
-  { lowerBound: 50000, upperBound: 74999, baseCost: 3450, rate: 0.169 },
-  { lowerBound: 75000, upperBound: 99999, baseCost: 7675, rate: 0.184 },
-  { lowerBound: 100000, upperBound: 199999, baseCost: 12275, rate: 0.216 },
+  { lowerBound: 25000, upperBound: 49999, baseCost: 0, rate: 0.11 },
+  { lowerBound: 50000, upperBound: 74999, baseCost: 2750, rate: 0.13 },
+  { lowerBound: 75000, upperBound: 99999, baseCost: 6000, rate: 0.15 },
+  { lowerBound: 100000, upperBound: 199999, baseCost: 9750, rate: 0.17 },
   {
     lowerBound: 200000,
     upperBound: Number.POSITIVE_INFINITY,
-    baseCost: 33875,
-    rate: 0.246,
+    baseCost: 26750,
+    rate: 0.19,
   },
 ];
 
